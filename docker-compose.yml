@@ -1,0 +1,20 @@
+version: '3'
+services:
+    nginx:
+        build:
+            context: './nginx'
+        command: ['nginx', '-g', 'daemon off;']
+        ports:
+            - 80:80
+        extra_hosts:
+            - 'host.docker.internal:host-gateway'
+        expose:
+            - 80
+    back:
+        build:
+            context: './back'
+        command: 'node index'
+        ports:
+            - 3010:3010
+        expose:
+            - 3010
